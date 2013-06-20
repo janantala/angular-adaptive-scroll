@@ -87,9 +87,9 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
       window.requestAnimationFrame(scroll);
 
       $rootScope.$on('adaptive.scroll:deviceorientation', function(e, data){
-        var alphaDiff = data.alphaDiff;
-        var betaDiff = data.betaDiff;
-        var gammaDiff = data.gammaDiff;
+        alphaDiff = data.alphaDiff;
+        betaDiff = data.betaDiff;
+        gammaDiff = data.gammaDiff;
       });
 
     }
