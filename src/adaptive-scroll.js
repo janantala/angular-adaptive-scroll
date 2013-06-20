@@ -4,9 +4,9 @@ var adaptive = angular.module('adaptive.scroll', []);
 
 adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
 
-  var startAlpha, startBeta, startGamma;
+  var alphaStart, betaStart, gammaStart;
   var alpha, beta, gamma;
-  var trashold = 30;
+  var trashold = 20;
   var active;
 
   window.ondeviceorientation = function(event) {
@@ -14,24 +14,30 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     beta = Math.round(event.beta);
     gamma = Math.round(event.gamma);
 
-    if (active && Math.abs(startAlpha - alpha) > trashold) {
+    if (active && Math.abs(alphaStart - alpha) > trashold) {
       sendEvent();
     }
   };
 
   var sendEvent = function() {
-
+    var alphaDiff = (alphaStart - alpha);
+    var betaDiff = (betaStart - beta);
+    var gammaDiff = (gammaStart - gamma);
+    $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
   };
 
-  var start = function(trashold) {
-    startAlpha = alpha;
-    startBeta = beta;
-    startGamma = gamma;
-    trashold = trashold;
+  var start = function(degrees) {
+    alphaStart = alpha;
+    betaStart = beta;
+    gammaStart = gamma;
+    trashold = degrees || trashold;
     active = true;
   };
 
   var stop = function() {
+    alphaStart = alpha;
+    betaStart = beta;
+    gammaStart = gamma;
     active = false;
     sendEvent();
   };
