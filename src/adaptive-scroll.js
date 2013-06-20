@@ -14,15 +14,20 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     beta = Math.round(event.beta);
     gamma = Math.round(event.gamma);
 
-    if (active && Math.abs(alphaStart - alpha) > trashold) {
-      sendEvent();
+    if (active) {
+      if ((Math.abs(alphaStart - alpha) > trashold) || (Math.abs(betaStart - beta) > trashold) || (Math.abs(gammaStart - gamma) > trashold)) {
+        sendEvent();
+      }
+      else {
+        sendEvent(0,0,0);
+      }
     }
   };
 
-  var sendEvent = function() {
-    var alphaDiff = (alphaStart - alpha);
-    var betaDiff = (betaStart - beta);
-    var gammaDiff = (gammaStart - gamma);
+  var sendEvent = function(a,b,c) {
+    var alphaDiff = a || (alphaStart - alpha);
+    var betaDiff = b || (betaStart - beta);
+    var gammaDiff = c || (gammaStart - gamma);
     $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
   };
 
@@ -35,11 +40,7 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   };
 
   var stop = function() {
-    alphaStart = alpha;
-    betaStart = beta;
-    gammaStart = gamma;
     active = false;
-    sendEvent();
   };
 
   return {
@@ -62,6 +63,26 @@ adaptive.directive('adaptive-scroll', ['$rootScope', function ($rootScope) {
       };
       var opts = getOptions();
       console.log(opts);
+
+      var alphaDiff = 0;
+      var betaDiff = 0;
+      var gammaDiff = 0;
+
+      var scroll = function() {
+        if (alphaDiff || betaDiff) {
+          document.body.scrollTop = document.body.scrollTop + alphaDiff; 
+          document.body.scrollLeft = document.body.scrollLeft + betaDiff;
+        }
+        window.requestAnimationFrame(scroll);
+      };
+
+      window.requestAnimationFrame(scroll);
+
+      $rootScope.$on('adaptive.scroll:deviceorientation', function(e, data){
+        var alphaDiff = data.alphaDiff;
+        var betaDiff = data.betaDiff;
+        var gammaDiff = data.gammaDiff;
+      });
 
     }
   };
