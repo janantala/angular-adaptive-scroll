@@ -54,15 +54,24 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
 
 }]);
 
-adaptive.directive('adaptive-scroll', ['$rootScope', function ($rootScope) {
+adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
       var getOptions = function () {
-        return angular.extend({}, scope.$eval(attrs.adaptive-scroll));
+        return angular.extend({}, scope.$eval(attrs.adaptivescroll));
       };
       var opts = getOptions();
       console.log(opts);
+
+      window.requestAnimationFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                  window.setTimeout(callback, 1000 / 60);
+                };
+      })();
 
       var alphaDiff = 0;
       var betaDiff = 0;
@@ -73,7 +82,6 @@ adaptive.directive('adaptive-scroll', ['$rootScope', function ($rootScope) {
           document.body.scrollTop = document.body.scrollTop + alphaDiff; 
           document.body.scrollLeft = document.body.scrollLeft + betaDiff;
         }
-        window.requestAnimationFrame(scroll);
       };
 
       window.requestAnimationFrame(scroll);
