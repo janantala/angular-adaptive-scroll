@@ -79,8 +79,8 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
 
       var scroll = function() {
         if (alphaDiff || betaDiff) {
-          document.body.scrollTop = document.body.scrollTop + alphaDiff; 
-          document.body.scrollLeft = document.body.scrollLeft + betaDiff;
+          element.scrollTop = element.scrollTop + alphaDiff; 
+          element.scrollLeft = element.scrollLeft + betaDiff;
         }
       };
 
