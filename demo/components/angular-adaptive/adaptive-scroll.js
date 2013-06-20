@@ -14,6 +14,12 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     beta = Math.round(event.beta);
     gamma = Math.round(event.gamma);
 
+    if (active && !alphaStart && !betaStart && !gammaStart) {
+      alphaStart = alpha;
+      betaStart = beta;
+      gammaStart = gamma;
+    }
+
     console.log(alpha, beta, gamma);
     console.log(Math.abs(alphaStart - alpha), Math.abs(betaStart - beta), Math.abs(gammaStart - gamma));
     console.log(Math.abs(alphaStart - alpha) > trashold, Math.abs(betaStart - beta) > trashold, Math.abs(gammaStart - gamma) > trashold);
@@ -35,24 +41,24 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
   };
 
-  var start = function(degrees) {
-    alphaStart = alpha;
-    betaStart = beta;
-    gammaStart = gamma;
+  var watchPosition = function(degrees) {
+    console.log('w', degrees);
     trashold = degrees || trashold;
     active = true;
   };
 
-  var stop = function() {
+  var ignorePosition = function() {
     active = false;
+    sendEvent(0,0,0);
   };
 
   return {
-    start: function() {
-      start();
+    watchPosition: function(degrees) {
+      console.log('rw', degrees);
+      watchPosition(degrees);
     },
-    stop: function() {
-      stop();
+    ignorePosition: function() {
+      ignorePosition();
     }
   };
 
@@ -83,17 +89,22 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
 
       var scroll = function() {
         if (alphaDiff || betaDiff) {
-          element.scrollTop = element.scrollTop + alphaDiff; 
-          element.scrollLeft = element.scrollLeft + betaDiff;
+          element[0].scrollTop = element[0].scrollTop + alphaDiff; 
+          element[0].scrollLeft = element[0].scrollLeft + betaDiff;
         }
+        window.requestAnimationFrame(scroll);
       };
 
       window.requestAnimationFrame(scroll);
 
       $rootScope.$on('adaptive.scroll:deviceorientation', function(e, data){
+
         alphaDiff = data.alphaDiff;
         betaDiff = data.betaDiff;
         gammaDiff = data.gammaDiff;
+
+        console.log('received', {'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
+
       });
 
     }
