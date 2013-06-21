@@ -9,7 +9,29 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   var trashold = 20;
   var active;
 
+  window.ondevicemotion = function(event) {
+var ax = event.accelerationIncludingGravity.x;
+var ay = event.accelerationIncludingGravity.y;
+var az = event.accelerationIncludingGravity.z;
+var rotation = event.rotationRate;
+console.log(ax);
+console.log(ay);
+console.log(az);
+console.log(rotation);
+if (rotation != null) {
+  var arAlpha = Math.round(rotation.alpha);
+  var arBeta = Math.round(rotation.beta);
+  var arGamma = Math.round(rotation.gamma);
+  console.log(arAlpha);
+  console.log(arBeta);
+  console.log(arGamma);
+
+}
+  };
+
+
   window.ondeviceorientation = function(event) {
+    alert('ondeviceorientation');
     alpha = Math.round(event.alpha);
     beta = Math.round(event.beta);
     gamma = Math.round(event.gamma);
