@@ -92,7 +92,7 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
               window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
         }
 
-        if (!window.requestAnimationFrame)
+        if (!window.requestAnimationFrame) {
             window.requestAnimationFrame = function(callback, element) {
                 var currTime = new Date().getTime();
                 var timeToCall = Math.max(0, 16 - (currTime - lastTime));
@@ -101,11 +101,13 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
                 lastTime = currTime + timeToCall;
                 return id;
             };
+        }
 
-        if (!window.cancelAnimationFrame)
+        if (!window.cancelAnimationFrame) {
             window.cancelAnimationFrame = function(id) {
                 clearTimeout(id);
             };
+        }
       }());
 
       var alphaDiff = 0;
@@ -125,17 +127,17 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
 
         console.log('received', data);
 
-        if (data.event == 'ondeviceorientation') {
+        if (data.event === 'ondeviceorientation') {
           alphaDiff = data.alphaDiff;
           betaDiff = data.betaDiff;
           gammaDiff = data.gammaDiff;
         }
 
-        if (data.event == 'ondeviceorientation' && !requestId) {
+        if (data.event === 'ondeviceorientation' && !requestId) {
           requestId = window.requestAnimationFrame(scroll);
         }
 
-        if (data.event == 'ondeviceorientationstop' && requestId) {
+        if (data.event === 'ondeviceorientationstop' && requestId) {
           window.cancelAnimationFrame(requestId);
           requestId = null;
         }
@@ -145,6 +147,5 @@ adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
     }
   };
 }]);
-
 
 })();
