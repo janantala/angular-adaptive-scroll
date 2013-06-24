@@ -10,7 +10,6 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   var active;
 
   window.ondeviceorientation = function(event) {
-    console.log(event);
     if (!active) {
       return false;
     }

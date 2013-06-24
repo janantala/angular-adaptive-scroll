@@ -11,6 +11,10 @@
 		<header style="position: fixed; top: 0; width: 100%; background: cyan;">
 			<p ng-click="start()">start</p>
 			<p ng-click="stop()">stop</p>
+			
+			<input type="range" min="0" max="360" step="0.2" ng-model="alpha" ng-change="orientateDevice(alpha,beta,gamma)">
+			<input type="range" min="-180" max="180" step="0.2" ng-model="beta" ng-change="orientateDevice(alpha,beta,gamma)">
+			<input type="range" min="-90" max="90" step="0.2" ng-model="gamma" ng-change="orientateDevice(alpha,beta,gamma)">
 		</header>
 		<section id="gyroscrollapp">
 			<p ng-repeat="line in lines">{{line}}</p>
@@ -20,5 +24,6 @@
 		<script src="components/angular-adaptive/adaptive-scroll.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/controllers/mainCtrl.js"></script>
+		<script src="js/services/gyrocopter.js"></script>
 	</body>
 </html>
