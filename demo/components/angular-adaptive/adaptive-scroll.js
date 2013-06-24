@@ -61,6 +61,9 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
 
   var ignorePosition = function() {
     active = false;
+    alphaStart = null;
+    betaStart = null;
+    gammaStart = null;
     stopEvent();
   };
 

@@ -5,7 +5,7 @@
 /**
  * The main controller for the app. 
  */
-gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope) {
+gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootScope) {
 	$scope.lines = [];
 	for (var i=0 ; i< 1000; i++) {
 		$scope.lines.push(i + ' ' + 'line');
@@ -21,9 +21,10 @@ gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope) {
 		$gyroscope.ignorePosition();
 	};
 
-	$scope.line = function(index){
-		console.log(index);
-	};
+	// window.setTimeout(function(){
+	// 	$rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientation', 'alphaDiff': 0, 'betaDiff': 40, 'gammaDiff': 0});
+	// }, 3000);
+  
 });
 
 })();
