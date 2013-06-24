@@ -2,7 +2,7 @@
 
 This module allows you to scroll an AngularJS app using gyroscope.
 
-**Note: You need a device with a gyroscope**
+**Note: You need a device with a gyroscope and a browser with requestAnimationFrame support for smooth scrolling**
 
 ### Demo
 
@@ -11,6 +11,12 @@ Check out http://angular-adaptive.github.io/adaptive-scroll/demo/
 # Requirements
 
 - AngularJS v 1.0+
+- device with a gyroscope
+- browser with requestAnimationFrame support for smooth scrolling 
+    - iOS Safari 6+, 
+    - Chrome for Android 25+, 
+    - Opera Mobile 14+
+    - Firefox for Android 19+
 
 # Usage
 
