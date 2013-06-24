@@ -20,11 +20,6 @@ gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootSco
 		console.log('stop');
 		$gyroscope.ignorePosition();
 	};
-
-	// window.setTimeout(function(){
-	// 	$rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientation', 'alphaDiff': 0, 'betaDiff': 40, 'gammaDiff': 0});
-	// }, 3000);
-  
 });
 
 })();
