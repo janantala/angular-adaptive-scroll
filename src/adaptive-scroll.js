@@ -33,6 +33,9 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     if ((Math.abs(alphaStart - alpha) > trashold) || (Math.abs(betaStart - beta) > trashold) || (Math.abs(gammaStart - gamma) > trashold)) {
       sendEvent();
     }
+    else {
+      stopEvent();
+    }
   };
 
   var sendEvent = function(a,b,c) {
