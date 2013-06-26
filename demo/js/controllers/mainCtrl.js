@@ -5,29 +5,24 @@
 /**
  * The main controller for the app. 
  */
-gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootScope, $gyrocopter) {
+gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootScope) {
 	$scope.lines = [];
-	for (var i=0 ; i< 1000; i++) {
+	for (var i=0 ; i< 50; i++) {
 		$scope.lines.push(i + ' ' + 'line');
 	}
+
+	$scope.gyro = {};
 
 	$scope.start = function(){
 		console.log('start');
 		$gyroscope.watchPosition(10);
+		$scope.gyro.started = true;
 	};
 
 	$scope.stop = function(){
 		console.log('stop');
 		$gyroscope.ignorePosition();
-	};
-
-	$scope.alpha = 0;
-	$scope.beta = 0;
-	$scope.gamma = 0;
-
-	$scope.orientateDevice = function(alpha, beta, gamma){
-		console.log(alpha, beta, gamma);
-		$gyrocopter.orientateDevice(alpha, beta, gamma, true);
+		$scope.gyro.started = false;
 	};
 });
 

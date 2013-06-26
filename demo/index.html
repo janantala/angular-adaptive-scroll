@@ -1,29 +1,83 @@
 <!doctype html>
 <html lang="en" ng-app="gyroscroll" data-framework="angularjs">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>AngularJS • gyroscroll</title>
-		<style>[ng-cloak] { display: none; }</style>
-	</head>
-	<body adaptivescroll ng-controller="mainCtrl">
-		<header style="position: fixed; top: 0; width: 100%; background: cyan;">
-			<p ng-click="start()">start</p>
-			<p ng-click="stop()">stop</p>
-			
-			<input type="range" min="0" max="360" step="0.2" ng-model="alpha" ng-change="orientateDevice(alpha,beta,gamma)">
-			<input type="range" min="-180" max="180" step="0.2" ng-model="beta" ng-change="orientateDevice(alpha,beta,gamma)">
-			<input type="range" min="-90" max="90" step="0.2" ng-model="gamma" ng-change="orientateDevice(alpha,beta,gamma)">
-		</header>
-		<section id="gyroscrollapp">
-			<p ng-repeat="line in lines">{{line}}</p>
-		</section>
-		
-		<script src="components/angular/angular.js"></script>
-		<script src="components/angular-adaptive/adaptive-scroll.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/controllers/mainCtrl.js"></script>
-		<script src="js/services/gyrocopter.js"></script>
-	</body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AngularJS • gyroscroll</title>
+<style>
+  [ng-cloak] { display: none; }
+  html, body { padding: 0; margin: 0; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; }
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  header {
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    background: black;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  header.started {
+    background: #5da423;
+  }
+
+  .content {
+      padding-top: 50px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .info {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .button { width: auto; background: #2ba6cb; border: 1px solid #1e728c; -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset; color: white; cursor: pointer; display: inline-block; font-family: inherit; font-size: 14px; font-weight: bold; line-height: 1; margin: 0; padding: 10px 20px 11px; position: relative; text-align: center; text-decoration: none; -webkit-transition: background-color 0.15s ease-in-out; -moz-transition: background-color 0.15s ease-in-out; -o-transition: background-color 0.15s ease-in-out; transition: background-color 0.15s ease-in-out; }
+  .button:hover, .button:focus { color: white; background-color: #2284a1; }
+  .button:active { -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset; -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset; }
+  .button.medium { font-size: 14px; }
+  .button.expand { width: 100%; text-align: center; }
+  .button.primary { background-color: #2ba6cb; border: 1px solid #1e728c; }
+  .button.primary:hover, .button.primary:focus { background-color: #2284a1; }
+  .button.success { background-color: #5da423; border: 1px solid #396516; }
+  .button.success:hover, .button.success:focus { background-color: #457a1a; }
+  .button.alert { background-color: #c60f13; border: 1px solid #7f0a0c; }
+  .button.alert:hover, .button.alert:focus { background-color: #970b0e; }
+  .button.secondary { background-color: #e9e9e9; color: #1d1d1d; border: 1px solid #c3c3c3; }
+  .button.secondary:hover, .button.secondary:focus { background-color: #d0d0d0; }
+
+</style>
+</head>
+<body adaptivescroll ng-controller="mainCtrl">
+    <header ng-class="{started:gyro.started}">
+        <button ng-click="start()" class="button primary medium">start</button>
+        <button ng-click="stop()" class="button secondary medium">stop</button>
+    </header>
+    <section class="content">
+    
+        <h4 class="info" ng-hide="gyro.started">
+          Click start button to gyroscroll.
+        </h4>
+        <p ng-repeat="line in lines">
+          <img ng-src="http://lorempixel.com/300/200/?{{line}}" alt="lorempixel">
+        </p>
+    </section>
+    
+    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-adaptive/adaptive-scroll.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/mainCtrl.js"></script>
+</body>
 </html>
