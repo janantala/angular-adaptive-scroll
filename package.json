@@ -1,6 +1,6 @@
 {
   "name": "angular-adaptive-scroll",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "This module allows you to scroll an AngularJS app using gyroscope.",
   "author": "https://github.com/angular-adaptive/adaptive-scroll/graphs/contributors",
   "license": "MIT",

@@ -24,11 +24,6 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
       gammaStart = gamma;
     }
 
-    console.log('starting', alphaStart, betaStart, gammaStart);
-    console.log('current', alpha, beta, gamma);
-    console.log('diff', Math.abs(alphaStart - alpha), Math.abs(betaStart - beta), Math.abs(gammaStart - gamma));
-    console.log('passed trashold: ' + trashold, Math.abs(alphaStart - alpha) > trashold, Math.abs(betaStart - beta) > trashold, Math.abs(gammaStart - gamma) > trashold);
-
     var alphaDiff = getDiff(alphaStart, alpha, 360);
     var betaDiff = getDiff(betaStart, beta, 360);
     var gammaDiff = getDiff(gammaStart, gamma, 180);
