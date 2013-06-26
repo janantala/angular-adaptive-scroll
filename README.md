@@ -8,8 +8,12 @@ This module allows you to scroll an AngularJS app using gyroscope.
 
 ### Demo
 
-Check out http://angular-adaptive.github.io/adaptive-scroll/demo/
-
+<p align="center">
+    Check out http://angular-adaptive.github.io/adaptive-scroll/demo/ Demo image with Gyrocopter extension.
+</p>
+<p align="center">
+    <img src="https://raw.github.com/angular-adaptive/adaptive-scroll/master/images/gyrocopter.gif" alt="demo" />
+</p>
 # Requirements
 
 - AngularJS v 1.0+
