@@ -31,6 +31,10 @@
       padding-top: 50px;
   }
 
+  .center {
+    text-align: center;
+  }
+
   img {
     width: 100%;
     max-width: 300px;
@@ -62,8 +66,8 @@
 </head>
 <body adaptivescroll ng-controller="mainCtrl">
     <header ng-class="{started:gyro.started}">
-        <button ng-click="start()" class="button primary medium">start</button>
-        <button ng-click="stop()" class="button secondary medium">stop</button>
+        <button ng-hide="gyro.started" ng-click="start()" class="button primary medium">start</button>
+        <button ng-show="gyro.started" ng-click="stop()" class="button secondary medium">stop</button>
     </header>
     <section class="content">
     
@@ -73,6 +77,9 @@
         <p ng-repeat="line in lines">
           <img ng-src="http://lorempixel.com/300/200/?{{line}}" alt="lorempixel">
         </p>
+        
+        <h5 class="center">Credits:</h5>
+        <p class="center"><a href="http://twitter.com/janantala">Jan Antala</a></p>
     </section>
     
     <script src="components/angular/angular.js"></script>

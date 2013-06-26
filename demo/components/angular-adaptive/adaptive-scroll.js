@@ -29,19 +29,25 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     console.log('diff', Math.abs(alphaStart - alpha), Math.abs(betaStart - beta), Math.abs(gammaStart - gamma));
     console.log('passed trashold: ' + trashold, Math.abs(alphaStart - alpha) > trashold, Math.abs(betaStart - beta) > trashold, Math.abs(gammaStart - gamma) > trashold);
 
-    if ((Math.abs(alphaStart - alpha) <= trashold) && (Math.abs(betaStart - beta) <= trashold) && (Math.abs(gammaStart - gamma) <= trashold)) {
+    var alphaDiff = getDiff(alphaStart, alpha, 360);
+    var betaDiff = getDiff(betaStart, beta, 360);
+    var gammaDiff = getDiff(gammaStart, gamma, 180);
+
+    if ((Math.abs(alphaDiff) <= trashold) && (Math.abs(betaDiff) <= trashold) && (Math.abs(gammaDiff) <= trashold)) {
       stopEvent();
     }
     else {
-      sendEvent();
+      sendEvent(alphaDiff, betaDiff, gammaDiff);
     }
   };
 
-  var sendEvent = function() {
-    var alphaDiff = (alphaStart - alpha);
-    var betaDiff = (betaStart - beta);
-    var gammaDiff = (gammaStart - gamma);
+  var getDiff = function(a, b, interval){
+    d1 = a - b;
+    d2 = a - b - interval;
+    return (Math.abs(d1) < Math.abs(d2)) ? d1 : d2;
+  };
 
+  var sendEvent = function(alphaDiff, betaDiff, gammaDiff) {
 
     if (Math.abs(alphaDiff) > trashold) {
       alphaDiff = alphaDiff < 0 ? alphaDiff + trashold : alphaDiff - trashold;
