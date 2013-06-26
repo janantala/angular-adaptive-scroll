@@ -15,7 +15,7 @@ gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootSco
 
 	$scope.start = function(){
 		console.log('start');
-		$gyroscope.watchPosition(10);
+		$gyroscope.watchPosition(15);
 		$scope.gyro.started = true;
 	};
 

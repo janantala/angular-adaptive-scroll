@@ -29,18 +29,30 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     console.log('diff', Math.abs(alphaStart - alpha), Math.abs(betaStart - beta), Math.abs(gammaStart - gamma));
     console.log('passed trashold: ' + trashold, Math.abs(alphaStart - alpha) > trashold, Math.abs(betaStart - beta) > trashold, Math.abs(gammaStart - gamma) > trashold);
 
-    if ((Math.abs(alphaStart - alpha) > trashold) || (Math.abs(betaStart - beta) > trashold) || (Math.abs(gammaStart - gamma) > trashold)) {
-      sendEvent();
+    if ((Math.abs(alphaStart - alpha) <= trashold) && (Math.abs(betaStart - beta) <= trashold) && (Math.abs(gammaStart - gamma) <= trashold)) {
+      stopEvent();
     }
     else {
-      stopEvent();
+      sendEvent();
     }
   };
 
-  var sendEvent = function(a,b,c) {
-    var alphaDiff = a || (alphaStart - alpha);
-    var betaDiff = b || (betaStart - beta);
-    var gammaDiff = c || (gammaStart - gamma);
+  var sendEvent = function() {
+    var alphaDiff = (alphaStart - alpha);
+    var betaDiff = (betaStart - beta);
+    var gammaDiff = (gammaStart - gamma);
+
+
+    if (Math.abs(alphaDiff) > trashold) {
+      alphaDiff = alphaDiff < 0 ? alphaDiff + trashold : alphaDiff - trashold;
+    }
+    if (Math.abs(betaDiff) > trashold) {
+      betaDiff = betaDiff < 0 ? betaDiff + trashold : betaDiff - trashold;
+    }
+    if (Math.abs(gammaDiff) > trashold) {
+      gammaDiff = gammaDiff < 0 ? gammaDiff + trashold : gammaDiff - trashold;
+    }
+
     $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientation', 'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
   };
 
