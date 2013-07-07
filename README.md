@@ -69,6 +69,18 @@ To stop scrolling run method ignorePosition():
 
     $gyroscope.ignorePosition();
 
+There are also dirrection events returning direction diff you can handle
+
+    $gyroscope.onalpha(function(alphaDiff){
+    	console.log(alphaDiff);
+	});
+	$gyroscope.onbeta(function(betaDiff){
+		console.log(betaDiff);
+	});
+	$gyroscope.ongamma(function(gammaDiff){
+		console.log(gammaDiff);
+	});
+
 # Testing
 
 We use karma and jshint to ensure the quality of the code. The easiest way to run these checks is to use grunt:
