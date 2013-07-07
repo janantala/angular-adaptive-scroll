@@ -27,7 +27,7 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
       gammaStart = gamma;
     }
 
-    var alphaDiff = getDiff(alphaStart, alpha, 360);
+    var alphaDiff = getDiff(alphaStart, alpha, -360);
     var betaDiff = getDiff(betaStart, beta, 360);
     var gammaDiff = getDiff(gammaStart, gamma, 180);
 
