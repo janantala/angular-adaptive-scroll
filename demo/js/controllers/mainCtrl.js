@@ -24,6 +24,16 @@ gyroscroll.controller('mainCtrl', function mainCtrl($scope, $gyroscope, $rootSco
 		$gyroscope.ignorePosition();
 		$scope.gyro.started = false;
 	};
+
+	$gyroscope.onalpha(function(alphaDiff){
+		console.log(alphaDiff);
+	});
+	$gyroscope.onbeta(function(betaDiff){
+		console.log(betaDiff);
+	});
+	$gyroscope.ongamma(function(gammaDiff){
+		console.log(gammaDiff);
+	});
 });
 
 })();
