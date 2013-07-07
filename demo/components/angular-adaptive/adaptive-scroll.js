@@ -60,13 +60,13 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientation', 'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
 
     if (onalpha && alphaDiff !== 0){
-      onalpha();
+      onalpha(alphaDiff);
     }
     if (onbeta && betaDiff !== 0){
-      onbeta();
+      onbeta(betaDiff);
     }
     if (ongamma && gammaDiff !== 0){
-      ongamma();
+      ongamma(gammaDiff);
     }
   };
 
