@@ -8,6 +8,9 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   var alpha, beta, gamma;
   var trashold = 20;
   var active;
+  var onalpha;
+  var onbeta;
+  var ongamma;
 
   window.ondeviceorientation = function(event) {
     if (!active) {
@@ -55,6 +58,16 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     }
 
     $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientation', 'alphaDiff': alphaDiff, 'betaDiff': betaDiff, 'gammaDiff': gammaDiff});
+
+    if (onalpha && alphaDiff !== 0){
+      onalpha();
+    }
+    if (onbeta && betaDiff !== 0){
+      onbeta();
+    }
+    if (ongamma && gammaDiff !== 0){
+      ongamma();
+    }
   };
 
   var startEvent = function() {
@@ -85,6 +98,15 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     },
     ignorePosition: function() {
       ignorePosition();
+    },
+    onalpha: function(fn) {
+      onalpha = fn;
+    },
+    onbeta: function(fn) {
+      onbeta = fn;
+    },
+    ongamma: function(fn) {
+      ongamma = fn;
     }
   };
 
