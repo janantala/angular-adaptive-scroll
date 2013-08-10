@@ -7,7 +7,7 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   var alphaStart, betaStart, gammaStart;
   var alpha, beta, gamma;
   var trashold = 20;
-  var active;
+  var active = false;
   var onalpha;
   var onbeta;
   var ongamma;
