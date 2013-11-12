@@ -4,19 +4,27 @@
   "description": "This module allows you to scroll an AngularJS app using gyroscope.",
   "author": "https://github.com/angular-adaptive/adaptive-scroll/graphs/contributors",
   "license": "MIT",
+  "keywords": [
+    "angular",
+    "adaptive",
+    "scroll",
+    "gyroscope"
+  ],
   "homepage": "http://angular-adaptive.github.io",
-  "main": "./src/adaptive-scroll.js",
+  "main": "./src/angular-adaptive-scroll.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular-adaptive/adaptive-scroll.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-karma": "*",
     "grunt-contrib-jshint": "~0.2.0",
     "grunt-conventional-changelog": "~1.0.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
     "matchdep": "~0.3.0"
   },
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/angular-adaptive/adaptive-scroll.git"
-  }
+  "scripts": {}
 }
