@@ -1,9 +1,3 @@
-/*!
- * angular-adaptive-scroll v0.1.5
- * The MIT License
- * Copyright (c) 2013 Jan Antala
- */
-
 (function () {
 
 var adaptive = angular.module('adaptive.scroll', []);

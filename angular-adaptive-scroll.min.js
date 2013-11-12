@@ -1,5 +1,5 @@
 /*!
- * angular-adaptive-scroll v0.1.5
+ * angular-adaptive-scroll v0.2.0
  * The MIT License
  * Copyright (c) 2013 Jan Antala
  */
