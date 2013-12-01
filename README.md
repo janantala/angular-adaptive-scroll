@@ -1,4 +1,4 @@
-# adaptive-scroll v0.1.5 [![Build Status](https://travis-ci.org/angular-adaptive/adaptive-scroll.png?branch=master)](https://travis-ci.org/angular-adaptive/adaptive-scroll)
+# adaptive-scroll v0.2.0 [![Build Status](https://travis-ci.org/angular-adaptive/adaptive-scroll.png?branch=master)](https://travis-ci.org/angular-adaptive/adaptive-scroll)
 
 This module allows you to scroll an AngularJS app using gyroscope.
 
@@ -36,10 +36,10 @@ To your `bower.json` file. Then run
 
     bower install
 
-This will copy the scroll files into your `components` folder, along with its dependencies. Load the script files in your application:
+This will copy the scroll files into your `bower_components` folder, along with its dependencies. Load the script files in your application:
 
-    <script type="text/javascript" src="components/angular/angular.js"></script>
-    <script type="text/javascript" src="components/angular-adaptive-scroll/src/adaptive-scroll.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-adaptive-scroll/angular-adaptive-scroll.min.js"></script>
 
 **Add the adaptive.scroll module** as a dependency to your application module:
 
