@@ -1,7 +1,26 @@
 (function () {
-
+/**
+ * @ngdoc overview
+ * @name adaptive.scroll
+ *
+ * @description
+ * The `adaptive.scroll` module provides components to realize adaptive scrolling
+ * in your Angular applications. You can use its components to, for example,
+ * let the user scroll in your app by changing the alpha, beta and gamma relations
+ * on his mobile device.
+ */
 var adaptive = angular.module('adaptive.scroll', []);
 
+/**
+ * @ngdoc object
+ * @name adaptive.scroll.$gyroscope
+ * @requires $rootScope
+ *
+ * @description
+ * The `$gyroscope` is your interface to communicate with the device' gyroscope.
+ * It provides methods to react on alpha, beta or gamma value changes and it also
+ * let's you scroll through your application programatically.
+ */
 adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
 
   var alphaStart, betaStart, gammaStart;
@@ -10,6 +29,7 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
   var active = false;
   var onalpha;
   var onbeta;
+
   var ongamma;
 
   window.ondeviceorientation = function(event) {
@@ -78,12 +98,30 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
         $rootScope.$broadcast('adaptive.scroll:deviceorientation', {'event': 'ondeviceorientationstop'});
   };
 
+  /**
+   * @ngdoc function
+   * @name adaptive.scroll.$gyroscope#watchPosition
+   * @methodOf adaptive.scope.$gyroscope
+   *
+   * @description
+   * This method starts scrolling by considering the given trashold in degrees.
+   *
+   * @param {number} degress Trashold in degrees.
+   */
   var watchPosition = function(degrees) {
     console.log('trashold', degrees);
     trashold = degrees || trashold;
     active = true;
   };
 
+  /**
+   * @ngdoc function
+   * @name adaptive.scroll.$gyroscope#ignorePosition
+   * @method adaptive.scroll.$gyroscope
+   *
+   * @description
+   * Stops current scrolling.
+   */
   var ignorePosition = function() {
     active = false;
     alphaStart = null;
@@ -99,12 +137,45 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
     ignorePosition: function() {
       ignorePosition();
     },
+    /**
+     * @ngdoc function
+     * @name adaptive.scroll.$gyroscope#onalpha
+     * @method adaptive.scroll.$gyroscope
+     *
+     * @description
+     * Registers callback which gets executed when alpha direction changes.
+     * You can access the alpha value diff in the callback.
+     *
+     * @param {object} fn Callback function
+     */
     onalpha: function(fn) {
       onalpha = fn;
     },
+    /**
+     * @ngdoc function
+     * @name adaptive.scroll.$gyroscope#onbeta
+     * @method adaptive.scroll.$gyroscope
+     *
+     * @description
+     * Registers callback which gets executed when beta direction changes.
+     * You can access the beta value diff in the callback.
+     *
+     * @param {object} fn Callback function
+     */
     onbeta: function(fn) {
       onbeta = fn;
     },
+    /**
+     * @ngdoc function
+     * @name adaptive.scroll.$gyroscope#ongamma
+     * @method adaptive.scroll.$gyroscope
+     *
+     * @description
+     * Registers callback which gets executed when gamma direction changes.
+     * You can access the gamma value diff in the callback.
+     *
+     * @param {object} fn Callback function
+     */
     ongamma: function(fn) {
       ongamma = fn;
     }
@@ -112,6 +183,15 @@ adaptive.factory('$gyroscope', ['$rootScope', function ($rootScope) {
 
 }]);
 
+/**
+ * @ngdoc object
+ * @name adaptive.scroll.directive:adaptivescroll
+ * @requires $rootScope
+ * @restrict A
+ *
+ * @description
+ * Apply this directive to any scrollable element to make it adaptively scrollable.
+ */
 adaptive.directive('adaptivescroll', ['$rootScope', function ($rootScope) {
   return {
     restrict: 'A',
