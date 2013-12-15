@@ -28,9 +28,11 @@ This module allows you to scroll an AngularJS app using gyroscope.
 
 We use [bower](http://twitter.github.com/bower/) for dependency management. Add
 
-    dependencies: {
-        "angular-adaptive-scroll": "latest"
-    }
+```json
+dependencies: {
+	"angular-adaptive-scroll": "latest"
+}
+```
 
 To your `bower.json` file. Then run
 
@@ -38,48 +40,62 @@ To your `bower.json` file. Then run
 
 This will copy the scroll files into your `bower_components` folder, along with its dependencies. Load the script files in your application:
 
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-adaptive-scroll/angular-adaptive-scroll.min.js"></script>
+```html
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-adaptive-scroll/angular-adaptive-scroll.min.js"></script>
+```
 
 **Add the adaptive.scroll module** as a dependency to your application module:
 
-    var myAppModule = angular.module('MyApp', ['adaptive.scroll']);
+```js
+var myAppModule = angular.module('MyApp', ['adaptive.scroll']);
+```
 
 and **include $gyroscope service** as a dependency to your controller:
 
-    angular.module('MyApp').controller('MainCtrl', function ['$scope', '$gyroscope', ($scope, $gyroscope) {
+```js
+angular.module('MyApp').controller('MainCtrl', function ['$scope', '$gyroscope', ($scope, $gyroscope) {
 
-    }]);
+}]);
+```
 
 **Append a directive adaptivescroll** to the scrollable element.
 
-    <body adaptivescroll>
-      ...
-    </body>
-    
-    or
-    
-    <textarea adaptivescroll></textarea>
+```html
+<body adaptivescroll>
+<!-- ... -->
+</body>
+```    
+or
 
+```html    
+<textarea adaptivescroll></textarea>
+```
 To start scrolling **run method watchPosition()** and pass trashold argument (in degrees):
 
-    $gyroscope.watchPosition(10);
+```js
+$gyroscope.watchPosition(10);
+```
 
 To stop scrolling run method ignorePosition():
 
-    $gyroscope.ignorePosition();
+```js
+$gyroscope.ignorePosition();
+```
 
 There are also dirrection events returning direction diff you can handle
 
-    $gyroscope.onalpha(function(alphaDiff){
-    	console.log(alphaDiff);
-	});
-	$gyroscope.onbeta(function(betaDiff){
-		console.log(betaDiff);
-	});
-	$gyroscope.ongamma(function(gammaDiff){
-		console.log(gammaDiff);
-	});
+```js
+$gyroscope.onalpha(function(alphaDiff){
+	console.log(alphaDiff);
+});
+$gyroscope.onbeta(function(betaDiff){
+	console.log(betaDiff);
+});
+$gyroscope.ongamma(function(gammaDiff){
+	console.log(gammaDiff);
+});
+```
 
 # Testing
 
